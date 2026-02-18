@@ -17,12 +17,18 @@ modeles = [
 question = "Tu es un conseiller financier. Un client a 10 000€ d'économies, il a 25 ans, un salaire stable mais des dettes de 3 000€. Il veut investir. Que lui conseilles-tu et pourquoi ?"
 
 for modele in modeles:
+
+    print(f"\n-------------------------")
     print(f"\n--- Modèle : {modele} ---")
+    print(f"\n------------------------\n")
+
+
     response = client.chat.completions.create(
         model=modele,
         messages=[{"role": "user", "content": question}]
     )
-    print(response.choices[0].message.content)
+    print(response.choices[0].message.content, "\n")
+    print(f"\n[Tokens] Prompt: {response.usage.prompt_tokens} | Réponse: {response.usage.completion_tokens} | Total: {response.usage.total_tokens}")
 
 
 # api_key = os.environ.get("GROQ_API_KEY")
